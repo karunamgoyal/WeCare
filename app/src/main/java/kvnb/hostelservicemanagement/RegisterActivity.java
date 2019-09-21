@@ -24,26 +24,6 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-class Person
-{
-    private String Name;
-    private String dob;
-    private boolean gender;
-    private boolean type;
-    private String contact_number;
-
-    Person(){}
-    Person(String Name, String dob, boolean gender, boolean type ,String contact_number)
-    {
-        this.dob = dob;
-        this.gender = gender;
-        this.Name = Name;
-        this.type = type;
-        this.contact_number = contact_number;
-    }
-}
-
-
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -53,7 +33,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button registerButton;
     private DatePickerDialog datePickerDialog;
 
-    Person person;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +136,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         String birthdate = birthdayEdittext.toString();
 
-        person = new Person(name,birthdate,gender,type,contactnumber);
 
     }
 
