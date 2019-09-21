@@ -71,9 +71,7 @@ public class ProfileFragment extends Fragment {
         Log.v("checkingprofile","12");
         username = (TextView) v.findViewById(R.id.usernameprofile);
         name = (TextView) v.findViewById(R.id.nameprofile);
-        rollno = (TextView) v.findViewById(R.id.rollnoprofile);
-        roomno = (TextView) v.findViewById(R.id.roomnoprofile);
-        hno = (TextView) v.findViewById(R.id.hostelnoprofile);
+
         phone=v.findViewById(R.id.phoneprofile);
         email=v.findViewById(R.id.emailprofile);
         name.setText(firebaseUser.getDisplayName());
