@@ -52,9 +52,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void bindViews() {
         firstnameEdittext=(EditText)findViewById(R.id.firstname_edittext);
         lastnameEdittext=(EditText)findViewById(R.id.lastname_edittext);
-        //emailEdittext=(EditText)findViewById(R.id.email_edittext);
-        //passEdittext=(EditText)findViewById(R.id.password_edittext);
-        //passAgainEdittext=(EditText)findViewById(R.id.password_again_edittext);
         birthdayEdittext=(EditText)findViewById(R.id.birthday_edittext);
         genderRadioGroup=(RadioGroup)findViewById(R.id.gender_radiogroup);
         registerButton=(Button)findViewById(R.id.register_button);
@@ -89,13 +86,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //Get edittexts values
         String firstname=firstnameEdittext.getText().toString();
         String lastname=lastnameEdittext.getText().toString();
-        //String email=emailEdittext.getText().toString();
-        //String pass=passEdittext.getText().toString();
-        //String passAgain=passAgainEdittext.getText().toString();
+        String name = firstname + lastname;
         String birthday=birthdayEdittext.getText().toString();
         String contactnumber = contactNumber.getText().toString();
 
-        String name = firstname + lastname;
 
 
         //Get gender
@@ -126,6 +120,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         else{
             Toast.makeText(this,getResources().getString(R.string.no_field_can_be_empty),Toast.LENGTH_SHORT).show();
         }
+
         boolean type = true;
         boolean gender = true;
         if(radiogender.equals("Female"))
