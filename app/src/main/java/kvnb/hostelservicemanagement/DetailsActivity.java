@@ -36,7 +36,7 @@ public class DetailsActivity extends AppCompatActivity {
     String description = "";
     String author = "";
     String publishedat = "";
-    String filename = "SocialCopsNewsAPPSaved";
+    String filename = "aved";
     FileOutputStream outputStream;
     FileInputStream inputStream;
     ObjectInputStream objectInputStream;
@@ -103,7 +103,7 @@ public class DetailsActivity extends AppCompatActivity {
                 startActivity(sendIntent);
                 // search action
                 return true;
-            case R.id.action_star:
+            /*case R.id.action_star:
                 // location found
                 HashMap<String, String> map = new HashMap<>();
                 map.put(KEY_URL, url);
@@ -122,7 +122,7 @@ public class DetailsActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
-                return true;
+                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }
