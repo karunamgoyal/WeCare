@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Servizy</string>
+    <string name="app_name">WeCare</string>
     <string name="button">LOG IN</string>
     <string name="button2">REGISTER</string>
-    <string name="title_activity_main2">Servizy</string>
+    <string name="title_activity_main2">WeCare</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Servizy</string>
+    <string name="nav_header_title">WeCare</string>
     <string name="nav_header_subtitle">Now Service is Easy</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">About Us</string>
@@ -44,8 +44,8 @@
     <string name="title_home">Notices</string>
     <string name="title_dashboard">Discussion</string>
     <string name="title_notifications">Profile</string>
-    <string name="title_activity_main3">Servizy</string>
-    <string name="title_activity_main4">Servizy</string>
+    <string name="title_activity_main3">WeCare</string>
+    <string name="title_activity_main4">WeCare</string>
     <string name="title_activity_complaint">Register Complaint</string>
     <string name="title_activity_user_complaint">Register Complaint</string>
     <string name="Sel">Select your issue:</string>
@@ -57,5 +57,5 @@
     <string name="Other">Other</string>
     <string name="comp">Would you like to receive notifications?</string>
     <string name="title_activity_profile_setting">Profile Settings</string>
-    <string name="title_activity_parent">Servizy</string>
+    <string name="title_activity_parent">WeCare</string>
 </resources>
