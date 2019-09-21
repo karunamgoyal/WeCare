@@ -21,6 +21,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -76,13 +78,15 @@ public class ParentActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent in = getIntent();
-        ausername = in.getStringExtra(str);
+
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        ausername =  firebaseUser.getUid().toString();
         tabLayout=findViewById(R.id.tabLayout);
         viewPager=findViewById(R.id.viewPager);
         viewPageAdapter=new ViewPageAdapter(getSupportFragmentManager());
         //Add fragment
         viewPageAdapter.AddFragment(new NoticeFragment(),"");
-        viewPageAdapter.AddFragment(new DiscussionFragment(),"");
+        viewPageAdapter.AddFragment(new NoticeFragment(),"");
         viewPageAdapter.AddFragment(new ProfileFragment(),"");
         viewPager.setAdapter(viewPageAdapter);
         fab = (FloatingActionButton) findViewById(R.id.fab);

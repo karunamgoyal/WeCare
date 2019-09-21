@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -65,7 +67,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v=inflater.inflate(R.layout.fragment_profile, container, false);
-
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Log.v("checkingprofile","12");
         username = (TextView) v.findViewById(R.id.usernameprofile);
         name = (TextView) v.findViewById(R.id.nameprofile);
@@ -74,37 +76,10 @@ public class ProfileFragment extends Fragment {
         hno = (TextView) v.findViewById(R.id.hostelnoprofile);
         phone=v.findViewById(R.id.phoneprofile);
         email=v.findViewById(R.id.emailprofile);
+        name.setText(firebaseUser.getDisplayName());
+        email.setText(firebaseUser.getEmail());
+        phone.setText(firebaseUser.getEmail());
 
-        Log.v("checkingprofile","13");
-        Log.v("checkingprofile","14");
-        if (!ausername.equals("")) {
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("registeruser").child(ausername);
-
-            Log.v("checkingprofile","14");
-            reference.addListenerForSingleValueEvent(new ValueEventListener() {
-
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        RegisterUser user = dataSnapshot.getValue(RegisterUser.class);
-                        username.setText("Username : "+ausername);
-                        name.setText("Name : "+user.getName());
-                        rollno.setText(user.getRollno());
-                        roomno.setText(user.getRoomno());
-                        hno.setText(user.getHno());
-                        email.setText(user.getMail());
-                        phone.setText(user.getPhno());
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-
-                }
-            });
-        }
 
         return v;
     }
