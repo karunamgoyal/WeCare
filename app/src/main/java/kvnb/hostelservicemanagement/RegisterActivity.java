@@ -1,33 +1,27 @@
 package kvnb.hostelservicemanagement;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 import java.util.Calendar;
-
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText firstnameEdittext,lastnameEdittext,emailEdittext,passEdittext,passAgainEdittext,birthdayEdittext;
+    private FirebaseUser user;
+    private Uri photoUrl;
+    private EditText firstnameEdittext,lastnameEdittext,birthdayEdittext;
     private EditText contactNumber;
     private RadioGroup genderRadioGroup;
     private Button registerButton;
@@ -37,17 +31,31 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        //Bind views with their ids
+        setContentView(R.layout.activity_register2);
+        user = FirebaseAuth.getInstance().getCurrentUser();
         bindViews();
-
-        //Set listeners of views
         setViewActions();
-
-        //Create DatePickerDialog to show a calendar to user to select birthdate
         prepareDatePickerDialog();
+        loadimage();
     }
+
+    private void loadimage(){
+
+
+        if (user != null) {
+            photoUrl = user.getPhotoUrl();
+        }
+        //Initialize ImageView
+        CircleImageView imageView = (CircleImageView) findViewById(R.id.profile_picture);
+        //Loading image from below URL into imageView
+        Picasso.with(this)
+                .load(photoUrl)
+                .placeholder(R.drawable.default_profile_pic)
+                .resize(200, 200)
+                .centerCrop()
+                .into(imageView);
+    }
+
 
     private void bindViews() {
         firstnameEdittext=(EditText)findViewById(R.id.firstname_edittext);
@@ -55,8 +63,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         birthdayEdittext=(EditText)findViewById(R.id.birthday_edittext);
         genderRadioGroup=(RadioGroup)findViewById(R.id.gender_radiogroup);
         registerButton=(Button)findViewById(R.id.register_button);
-
-        //Edited
         contactNumber = (EditText)findViewById(R.id.contact_number);
     }
 
@@ -120,7 +126,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         else{
             Toast.makeText(this,getResources().getString(R.string.no_field_can_be_empty),Toast.LENGTH_SHORT).show();
         }
-
         boolean type = true;
         boolean gender = true;
         if(radiogender.equals("Female"))
