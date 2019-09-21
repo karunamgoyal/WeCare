@@ -67,7 +67,6 @@ public class NoticeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         v = inflater.inflate(R.layout.fragment_notice, container, false);
         mMessageRecyclerView = (RecyclerView) v.findViewById(R.id.messageRecyclerView1);
         mLinearLayoutManager = new LinearLayoutManager(getContext());

@@ -86,7 +86,7 @@ public class ParentActivity extends AppCompatActivity
         viewPageAdapter=new ViewPageAdapter(getSupportFragmentManager());
         //Add fragment
         viewPageAdapter.AddFragment(new NoticeFragment(),"");
-        viewPageAdapter.AddFragment(new NoticeFragment(),"");
+        viewPageAdapter.AddFragment(new NewsFragment(),"");
         viewPageAdapter.AddFragment(new ProfileFragment(),"");
         viewPager.setAdapter(viewPageAdapter);
         fab = (FloatingActionButton) findViewById(R.id.fab);

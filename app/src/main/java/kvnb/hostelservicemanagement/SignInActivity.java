@@ -140,7 +140,7 @@ public class SignInActivity extends AppCompatActivity implements
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Log.d(TAG, "i am working");
-                            startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                            startActivity(new Intent(SignInActivity.this, ParentActivity.class));
                             finish();
                         }
                     }
