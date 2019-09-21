@@ -149,10 +149,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         boolean type = true;
         boolean gender = true;
-        if(radiogender == "Female")
+        if(radiogender.equals("Female"))
+        {
             gender = false;
+        }
 
-        if(typeofperson == " am a doctor")
+        if(typeofperson.equals(" am a doctor"))
             type = false;
 
         String birthdate = birthdayEdittext.toString();
