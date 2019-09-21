@@ -9,8 +9,5 @@
         app:showAsAction="ifRoom" />
 
     <!-- Location Found -->
-    <item android:id="@+id/action_star"
-        android:icon="@drawable/ic_star_1"
-        android:title="Save"
-        app:showAsAction="ifRoom" />
+
 </menu>

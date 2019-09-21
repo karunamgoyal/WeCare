@@ -24,6 +24,8 @@
         android:layout_height="wrap_content"
         android:text="We Care"
         android:textSize="36dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:textColor="#000"
         android:fontFamily="@font/ubuntu_italic"
         app:layout_constraintBottom_toBottomOf="parent"

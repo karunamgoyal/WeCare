@@ -1,15 +1,18 @@
 package kvnb.hostelservicemanagement;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -124,8 +127,8 @@ public class ParentActivity extends AppCompatActivity
             }
         });
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_complaint);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_chat_black_24dp);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorite1);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_complaint);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_account);DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -133,29 +136,11 @@ public class ParentActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        DatabaseReference mydb=FirebaseDatabase.getInstance().getReference().child("notices");
-        mydb.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Intent intentNotification= new Intent();
+        final int MY_CAMERA_REQUEST_CODE = 100;
 
-                PendingIntent pendingintent=PendingIntent.getActivity(ParentActivity.this,0,intentNotification,0);
-                Notification noti=new Notification.Builder(ParentActivity.this).setTicker("Ticker")
-                        .setContentTitle("New Notices")
-                        .setContentText("Check your Notices")
-                        .setSmallIcon(R.drawable.logo)
-                        .setContentIntent(pendingintent).getNotification();
-                noti.flags=Notification.FLAG_AUTO_CANCEL;
-                NotificationManager notificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-                notificationManager.notify(0,noti);
-            }
-    // in case of error
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+        }
     }
 
     @Override
@@ -204,22 +189,18 @@ public class ParentActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-            Intent in = new Intent(this, UserComplaint.class);
-            in.putExtra(str, ausername);
+            Intent in = new Intent(this, ChatActivity.class);
             startActivity(in);
         } else if (id == R.id.nav_slideshow) {
-            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-            final SharedPreferences.Editor editor = pref.edit();
-            editor.clear();
-            editor.commit();
-            Intent in = new Intent(this, MainActivity.class);
-            startActivity(in);
-        } else if (id == R.id.nav_manage) {
+            FirebaseAuth.getInstance().signOut();
+            Intent I = new Intent(this, SignInActivity.class);
+            startActivity(I);
+        } /*else if (id == R.id.nav_manage) {
             Intent in = new Intent(this, ProfileSetting.class);
             in.putExtra(str, ausername);
             startActivity(in);
 
-        }
+        }*/
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
