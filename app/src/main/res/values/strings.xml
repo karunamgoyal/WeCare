@@ -58,4 +58,23 @@
     <string name="comp">Would you like to receive notifications?</string>
     <string name="title_activity_profile_setting">Profile Settings</string>
     <string name="title_activity_parent">WeCare</string>
-</resources>
+
+    <!-- Megaleio-->
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="password_again">Password Again</string>
+    <string name="birthday">Birthday</string>
+    <string name="gender">Gender : </string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="register">Register</string>
+    <string name="register_form_text">You need to fill up below register form.</string>
+    <string name="no_field_can_be_empty">No field can be empty</string>
+    <string name="passwords_must_be_the_same">Password and password again field must be the same</string>
+    <string name="here_is_values">Here is values: %1$s</string>
+    <string name="patient"> in need of a doctor</string>
+    <string name="doctor"> a doctor</string>
+    <string name="type">I am     </string>
+    <string name="contact_no">Contact Number</string>
+
+    </resources>
