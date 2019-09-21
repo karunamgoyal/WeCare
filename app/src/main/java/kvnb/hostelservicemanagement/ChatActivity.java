@@ -83,7 +83,7 @@ public class ChatActivity extends AppCompatActivity {
 
     // Firebase instance variables
     private DatabaseReference mFirebaseDatabaseReference;
-    private FirebaseRecyclerAdapter<FriendlyMessage, DiscussionFragment.MessageViewHolder>
+    private FirebaseRecyclerAdapter<FriendlyMessage, ChatActivity.MessageViewHolder>
             mFirebaseAdapter;
     // private OnFragmentInteractionListener mListener;
 
@@ -119,15 +119,15 @@ public class ChatActivity extends AppCompatActivity {
                 new FirebaseRecyclerOptions.Builder<FriendlyMessage>()
                         .setQuery(messagesRef, parser)
                         .build();
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, DiscussionFragment.MessageViewHolder>(options) {
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, ChatActivity.MessageViewHolder>(options) {
             @Override
-            public DiscussionFragment.MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            public ChatActivity.MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-                return new DiscussionFragment.MessageViewHolder(inflater.inflate(R.layout.item_message, viewGroup, false));
+                return new ChatActivity.MessageViewHolder(inflater.inflate(R.layout.item_message, viewGroup, false));
             }
 
             @Override
-            protected void onBindViewHolder(final DiscussionFragment.MessageViewHolder viewHolder,
+            protected void onBindViewHolder(final ChatActivity.MessageViewHolder viewHolder,
                                             int position,
                                             FriendlyMessage friendlyMessage) {
                 mProgressBar.setVisibility(ProgressBar.INVISIBLE);

@@ -92,40 +92,8 @@ public class ParentActivity extends AppCompatActivity
         viewPageAdapter.AddFragment(new NewsFragment(),"");
         viewPageAdapter.AddFragment(new ProfileFragment(),"");
         viewPager.setAdapter(viewPageAdapter);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendComplaint();
-            }
-        });
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
 
-            }
 
-            @Override
-            public void onPageSelected(int i) {
-                switch (i){
-                    case 0:
-                        fab.show();
-                        break;
-                    case 1:
-                        fab.hide();
-                        break;
-                    case 2:
-                        fab.hide();
-                        break;
-                }
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
-        });
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorite1);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_complaint);

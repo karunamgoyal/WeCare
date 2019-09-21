@@ -71,7 +71,14 @@ public class NoticeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        CardView cardViewgroup = v.findViewById(R.id.cardgroup);
+        cardViewgroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),Groups.class);
+                startActivity(intent);
+            }
+        });
         return v;
     }
 

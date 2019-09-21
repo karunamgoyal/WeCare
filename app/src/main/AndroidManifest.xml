@@ -12,14 +12,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".StepCounter"></activity>
+        <activity android:name=".CreateGroup"></activity>
+        <activity android:name=".Groups" />
+        <activity android:name=".StepCounter" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".HeartRateMonitor" />
         <activity android:name=".DetailsActivity" />
         <activity android:name=".RegisterActivity" />
-
         <activity
             android:name=".Register"
             android:parentActivityName=".MainActivity">
@@ -27,7 +28,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="kvnb.hostelservicemanagement.MainActivity" />
         </activity>
-
         <activity
             android:name=".AppSettings"
             android:parentActivityName=".ParentActivity">
@@ -63,11 +63,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".MyBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
 
         <receiver android:name=".MyBroadcastReceiver">
             <intent-filter>
@@ -78,12 +73,12 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-feature android:name="android.hardware.camera.flash" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>
