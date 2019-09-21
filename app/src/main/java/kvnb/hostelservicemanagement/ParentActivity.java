@@ -195,12 +195,11 @@ public class ParentActivity extends AppCompatActivity
             FirebaseAuth.getInstance().signOut();
             Intent I = new Intent(this, SignInActivity.class);
             startActivity(I);
-        } /*else if (id == R.id.nav_manage) {
-            Intent in = new Intent(this, ProfileSetting.class);
-            in.putExtra(str, ausername);
+        } else if (id == R.id.nav_manage) {
+            Intent in = new Intent(this, StepCounter.class);
             startActivity(in);
 
-        }*/
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
