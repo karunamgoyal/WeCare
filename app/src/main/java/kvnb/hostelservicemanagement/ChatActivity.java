@@ -168,7 +168,7 @@ public class ChatActivity extends AppCompatActivity {
                 viewHolder.messengerTextView.setText(friendlyMessage.getName());
                 if (friendlyMessage.getPhotoUrl() == null) {
                     viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
-                            R.drawable.ic_account_circle_black_35dp));
+                            R.drawable.ic_account1));
                 } else {
                     Glide.with(ChatActivity.this)
                             .load(friendlyMessage.getPhotoUrl())
