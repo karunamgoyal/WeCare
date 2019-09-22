@@ -43,7 +43,8 @@ import com.google.firebase.storage.UploadTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ChatActivity extends AppCompatActivity {
+public class GroupChat extends AppCompatActivity {
+
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         TextView messageTextView;
         ImageView messageImageView;
@@ -80,11 +81,10 @@ public class ChatActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private ImageView mAddMessageImageView;
-    String key;
-    String doctor;
+    private String key;
     // Firebase instance variables
     private DatabaseReference mFirebaseDatabaseReference;
-    private FirebaseRecyclerAdapter<FriendlyMessage, ChatActivity.MessageViewHolder>
+    private FirebaseRecyclerAdapter<FriendlyMessage, GroupChat.MessageViewHolder>
             mFirebaseAdapter;
     // private OnFragmentInteractionListener mListener;
 
@@ -92,11 +92,17 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_group_chat);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mUsername = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         ausername =mUsername;
+         key = getIntent().getExtras().getString("key");
+        String name = getIntent().getExtras().getString("name");
+        toolbar.setTitle(name);
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        doctor = getIntent().getExtras().getString("doctor");
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mMessageRecyclerView = (RecyclerView) findViewById(R.id.messageRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -116,20 +122,20 @@ public class ChatActivity extends AppCompatActivity {
             }
         };
 
-        DatabaseReference messagesRef = mFirebaseDatabaseReference.child(MESSAGES_CHILD).child("doctor").child(doctor);
+        DatabaseReference messagesRef = mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key);
         FirebaseRecyclerOptions<FriendlyMessage> options =
                 new FirebaseRecyclerOptions.Builder<FriendlyMessage>()
                         .setQuery(messagesRef, parser)
                         .build();
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, ChatActivity.MessageViewHolder>(options) {
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, GroupChat.MessageViewHolder>(options) {
             @Override
-            public ChatActivity.MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            public GroupChat.MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-                return new ChatActivity.MessageViewHolder(inflater.inflate(R.layout.item_message, viewGroup, false));
+                return new GroupChat.MessageViewHolder(inflater.inflate(R.layout.item_message, viewGroup, false));
             }
 
             @Override
-            protected void onBindViewHolder(final ChatActivity.MessageViewHolder viewHolder,
+            protected void onBindViewHolder(final GroupChat.MessageViewHolder viewHolder,
                                             int position,
                                             FriendlyMessage friendlyMessage) {
                 mProgressBar.setVisibility(ProgressBar.INVISIBLE);
@@ -172,7 +178,7 @@ public class ChatActivity extends AppCompatActivity {
                     viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),
                             R.drawable.ic_account1));
                 } else {
-                    Glide.with(ChatActivity.this)
+                    Glide.with(GroupChat.this)
                             .load(friendlyMessage.getPhotoUrl())
                             .into(viewHolder.messengerImageView);
                 }
@@ -232,7 +238,7 @@ public class ChatActivity extends AppCompatActivity {
                         mUsername,
                         mPhotoUrl,
                         null /* no image */);
-                mFirebaseDatabaseReference.child(MESSAGES_CHILD).child("doctor").child(doctor)
+                mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key)
                         .push().setValue(friendlyMessage);
                 mMessageEditText.setText("");
             }

@@ -29,6 +29,8 @@ import com.google.android.gms.fitness.request.OnDataPointListener;
 import com.google.android.gms.fitness.request.SensorRequest;
 import com.google.android.gms.fitness.result.DataSourcesResult;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class StepCounter extends AppCompatActivity {
@@ -49,9 +51,23 @@ public class StepCounter extends AppCompatActivity {
         text = findViewById(R.id.text);
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                //your method
+            }
+        }, 0, 10000);
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
+
         connectFitness();
     }
 
@@ -113,7 +129,7 @@ public class StepCounter extends AppCompatActivity {
                             if (dataSource.getDataType().equals(DataType.TYPE_STEP_COUNT_DELTA) && mListener == null) {
                                 Log.i(TAG, "Data source for TYPE_STEP_COUNT_DELTA found!  Registering.");
 
-                                registerFitnessDataListener(dataSource, DataType.TYPE_STEP_COUNT_DELTA);
+                                registerFitnessDataListener(dataSource, DataType.AGGREGATE_STEP_COUNT_DELTA);
                             }
                         }
                     }

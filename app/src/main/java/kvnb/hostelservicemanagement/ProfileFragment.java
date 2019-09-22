@@ -69,7 +69,7 @@ public class ProfileFragment extends Fragment {
         v=inflater.inflate(R.layout.fragment_profile, container, false);
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Log.v("checkingprofile","12");
-        username = (TextView) v.findViewById(R.id.usernameprofile);
+
         name = (TextView) v.findViewById(R.id.nameprofile);
 
         phone=v.findViewById(R.id.phoneprofile);

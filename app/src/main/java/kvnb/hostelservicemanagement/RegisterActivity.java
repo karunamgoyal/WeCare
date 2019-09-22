@@ -1,6 +1,8 @@
 package kvnb.hostelservicemanagement;
 
+import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import java.util.Calendar;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -26,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private RadioGroup genderRadioGroup;
     private Button registerButton;
     private DatePickerDialog datePickerDialog;
-
+    private RadioGroup doctor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,46 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setViewActions();
         prepareDatePickerDialog();
         loadimage();
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               try {
+                   String name = user.getDisplayName();
+                   String phno = contactNumber.getText().toString();
+                   String dob = birthdayEdittext.getText().toString();
+                   boolean gender;
+                   DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
+                   DatabaseReference messagesRef = mFirebaseDatabaseReference.child("person").child(user.getUid());
+                   boolean type;
+                   if (genderRadioGroup.getCheckedRadioButtonId() == R.id.male)
+                       gender = true;
+                   else
+                       gender = false;
+                   if (doctor.getCheckedRadioButtonId() == R.id.doctor)
+                       type = true;
+                   else
+                       type = false;
+                   Person person = new Person(name, dob, gender, type, phno);
+                   messagesRef.setValue(person);
+
+                   Intent intent = new Intent(getApplicationContext(), ParentActivity.class);
+                   if (person.getType()) {
+                       intent.putExtra("type", "doctor");
+                   } else {
+                       intent.putExtra("type", "patient");
+
+                   }
+                   Snackbar.make(v, "Successful", Snackbar.LENGTH_LONG)
+                           .setAction("Action", null).show();
+                   startActivity(intent);
+                   finish();
+               }
+               catch (Exception e){
+                   Snackbar.make(v, "Error", Snackbar.LENGTH_LONG)
+                           .setAction("Action", null).show();
+               }
+            }
+        });
     }
 
     private void loadimage(){
@@ -64,6 +108,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         genderRadioGroup=(RadioGroup)findViewById(R.id.gender_radiogroup);
         registerButton=(Button)findViewById(R.id.register_button);
         contactNumber = (EditText)findViewById(R.id.contact_number);
+        doctor = findViewById(R.id.typeradiogroup);
     }
 
     private void setViewActions() {
@@ -104,8 +149,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         RadioButton typeRadioButton=(RadioButton)findViewById(genderRadioGroup.getCheckedRadioButtonId());
         String typeofperson=selectedRadioButton==null ? "":selectedRadioButton.getText().toString();
-
-
 
         //Check all fields
         if(!firstname.equals("")&&!lastname.equals("")&&!birthday.equals("")&&!radiogender.equals("")){

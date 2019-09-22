@@ -12,15 +12,18 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".CreateGroup"></activity>
-        <activity android:name=".Groups" />
-        <activity android:name=".StepCounter" />
-        <activity android:name=".ChatActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".HeartRateMonitor" />
-        <activity android:name=".DetailsActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".VideoChat"  android:parentActivityName=".ParentActivity"></activity>
+        <activity android:name=".Doctor"  android:parentActivityName=".ParentActivity" />
+        <activity android:name=".GroupChat"  android:parentActivityName=".ParentActivity" />
+        <activity android:name=".CreateGroup"  android:parentActivityName=".ParentActivity"/>
+        <activity android:name=".Groups"  android:parentActivityName=".ParentActivity" />
+        <activity android:name=".StepCounter"  android:parentActivityName=".ParentActivity"/>
+        <activity android:name=".ChatActivity"  android:parentActivityName=".ParentActivity"/>
+        <activity android:name=".MainActivity"  android:parentActivityName=".ParentActivity"/>
+        <activity android:name=".SignInActivity"  android:parentActivityName=".ParentActivity"/>
+        <activity android:name=".HeartRateMonitor"  android:parentActivityName=".ParentActivity"/>
+        <activity android:name=".DetailsActivity"  android:parentActivityName=".ParentActivity"/>
+        <activity android:name=".RegisterActivity"  android:parentActivityName=".ParentActivity"/>
         <activity
             android:name=".Register"
             android:parentActivityName=".MainActivity">
@@ -70,15 +73,16 @@
             </intent-filter>
         </receiver>
     </application>
-    <uses-feature android:name="android.hardware.camera" />
-
     <uses-feature android:name="android.hardware.camera.flash" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 </manifest>

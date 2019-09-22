@@ -76,5 +76,7 @@
     <string name="doctor"> a doctor</string>
     <string name="type">I am     </string>
     <string name="contact_no">Contact Number</string>
+    <string name="agora_app_id">9846c1f6b9e94b5bbefa08c3f0ad2790</string>
+
 
 </resources>

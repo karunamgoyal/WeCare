@@ -36,6 +36,8 @@ public class ParentActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static String ausername;
     private String str = "Message Checking";
+    private static final int PERMISSION_REQ_ID = 22;
+    private static final String[] REQUESTED_PERMISSIONS = {Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA};
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPageAdapter viewPageAdapter;
@@ -108,6 +110,7 @@ public class ParentActivity extends AppCompatActivity
 
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, 22);
         }
     }
 
@@ -156,18 +159,18 @@ public class ParentActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } /*else if (id == R.id.nav_gallery) {
             Intent in = new Intent(this, ChatActivity.class);
             startActivity(in);
-        } else if (id == R.id.nav_slideshow) {
+        } */else if (id == R.id.nav_slideshow) {
             FirebaseAuth.getInstance().signOut();
             Intent I = new Intent(this, SignInActivity.class);
             startActivity(I);
-        } else if (id == R.id.nav_manage) {
+        } /*else if (id == R.id.nav_manage) {
             Intent in = new Intent(this, StepCounter.class);
             startActivity(in);
 
-        }
+        }*/
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
