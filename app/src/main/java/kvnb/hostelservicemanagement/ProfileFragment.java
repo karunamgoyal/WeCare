@@ -47,7 +47,7 @@ public class ProfileFragment extends Fragment {
     TextView rollno;
     TextView roomno;
     TextView hno;
-   // private OnFragmentInteractionListener mListener;
+    // private OnFragmentInteractionListener mListener;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -56,24 +56,24 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ausername=ParentActivity.getMyData();
+        ausername = ParentActivity.getMyData();
 
-        Log.v("checkingprofile","11");
-        }
+        Log.v("checkingprofile", "11");
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v=inflater.inflate(R.layout.fragment_profile, container, false);
+        v = inflater.inflate(R.layout.fragment_profile, container, false);
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        Log.v("checkingprofile","12");
+        Log.v("checkingprofile", "12");
 
         name = (TextView) v.findViewById(R.id.nameprofile);
 
-        phone=v.findViewById(R.id.phoneprofile);
-        email=v.findViewById(R.id.emailprofile);
+        phone = v.findViewById(R.id.phoneprofile);
+        email = v.findViewById(R.id.emailprofile);
         name.setText(firebaseUser.getDisplayName());
         email.setText(firebaseUser.getEmail());
         phone.setText(firebaseUser.getEmail());

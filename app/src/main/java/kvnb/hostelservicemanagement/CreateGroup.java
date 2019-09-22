@@ -34,17 +34,17 @@ public class CreateGroup extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     DatabaseReference messagesRef = mFirebaseDatabaseReference.child("groups");
-                    RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
+
                     String name = groupname.getText().toString();
                     String des = groupdes.getText().toString();
                     String key = messagesRef.push().getKey();
-                    Log.v("checkingtheerror","107");
+                    Log.v("checkingtheerror", "107");
                     if (!(name.equals("") || des.equals(""))) {
 
-                        Log.v("checkingtheerror","123");
-                        Group group = new Group(name,des, FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                        Log.v("checkingtheerror", "123");
+                        Group group = new Group(name, des, FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
                         messagesRef.child(key).setValue(group);
-                        Log.v("checkingtheerror","126");
+                        Log.v("checkingtheerror", "126");
                         Snackbar.make(v, "Group Registered", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     } else {

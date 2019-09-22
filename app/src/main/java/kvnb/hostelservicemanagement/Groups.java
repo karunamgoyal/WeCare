@@ -50,14 +50,16 @@ public class Groups extends AppCompatActivity {
         TextView messengerTextView;
         TextView des;
         TextView join;
+
         public MessageViewHolder(View v) {
             super(v);
             messageTextView = (TextView) itemView.findViewById(R.id.groupname);
             des = itemView.findViewById(R.id.groupdescription);
             messengerTextView = (TextView) itemView.findViewById(R.id.admin);
-            join =  itemView.findViewById(R.id.join);
+            join = itemView.findViewById(R.id.join);
         }
     }
+
     private static final String TAG = "";
     public static final String MESSAGES_CHILD = "groups";
     private static final int REQUEST_INVITE = 1;
@@ -69,7 +71,8 @@ public class Groups extends AppCompatActivity {
     private String mUsername;
     private String mPhotoUrl;
     private SharedPreferences mSharedPreferences;
-    private GoogleApiClient mGoogleApiClient;;
+    private GoogleApiClient mGoogleApiClient;
+    ;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private Button mSendButton;
@@ -101,7 +104,7 @@ public class Groups extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),CreateGroup.class);
+                Intent intent = new Intent(getApplicationContext(), CreateGroup.class);
                 startActivity(intent);
             }
         });
@@ -175,8 +178,6 @@ public class Groups extends AppCompatActivity {
         });
 
         mMessageRecyclerView.setAdapter(mFirebaseAdapter);
-
-
 
 
     }

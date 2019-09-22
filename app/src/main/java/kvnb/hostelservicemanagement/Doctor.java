@@ -39,16 +39,18 @@ public class Doctor extends AppCompatActivity {
         TextView join;
         TextView video;
         CardView card;
+
         public MessageViewHolder(View v) {
             super(v);
             messageTextView = (TextView) itemView.findViewById(R.id.groupname);
             des = itemView.findViewById(R.id.groupdescription);
             messengerTextView = (TextView) itemView.findViewById(R.id.admin);
-            join =  itemView.findViewById(R.id.join);
+            join = itemView.findViewById(R.id.join);
             video = itemView.findViewById(R.id.video);
             card = itemView.findViewById(R.id.carddoctor1);
         }
     }
+
     private static final String TAG = "";
     public static final String MESSAGES_CHILD = "person";
     private static final int REQUEST_INVITE = 1;
@@ -60,7 +62,8 @@ public class Doctor extends AppCompatActivity {
     private String mUsername;
     private String mPhotoUrl;
     private SharedPreferences mSharedPreferences;
-    private GoogleApiClient mGoogleApiClient;;
+    private GoogleApiClient mGoogleApiClient;
+    ;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private Button mSendButton;
@@ -124,10 +127,10 @@ public class Doctor extends AppCompatActivity {
                                             final Person friendlyMessage) {
 
                 if (friendlyMessage.getName() != null) {
-                    Log.d("Checckingmsss",friendlyMessage.getName());
+                    Log.d("Checckingmsss", friendlyMessage.getName());
                     viewHolder.messageTextView.setText(friendlyMessage.getName());
-                    if(friendlyMessage.getType()==false){
-                        Log.d("Checckingmsss",""+friendlyMessage.getType());
+                    if (friendlyMessage.getType() == false) {
+                        Log.d("Checckingmsss", "" + friendlyMessage.getType());
                         viewHolder.des.setVisibility(TextView.GONE);
 
                         viewHolder.messageTextView.setVisibility(TextView.GONE);
@@ -176,8 +179,6 @@ public class Doctor extends AppCompatActivity {
         });
 
         mMessageRecyclerView.setAdapter(mFirebaseAdapter);
-
-
 
 
     }

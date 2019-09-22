@@ -71,7 +71,8 @@ public class ChatActivity extends AppCompatActivity {
     private String mUsername;
     private String mPhotoUrl;
     private SharedPreferences mSharedPreferences;
-    private GoogleApiClient mGoogleApiClient;;
+    private GoogleApiClient mGoogleApiClient;
+    ;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private Button mSendButton;
@@ -94,7 +95,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         mUsername = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-        ausername =mUsername;
+        ausername = mUsername;
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         doctor = getIntent().getExtras().getString("doctor");
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -102,7 +103,7 @@ public class ChatActivity extends AppCompatActivity {
         mLinearLayoutManager = new LinearLayoutManager(getApplicationContext());
         mLinearLayoutManager.setStackFromEnd(true);
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
-        ImageView imagebutton=findViewById(R.id.addMessageImageView);
+        ImageView imagebutton = findViewById(R.id.addMessageImageView);
         imagebutton.setVisibility(ImageView.GONE);
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         SnapshotParser<FriendlyMessage> parser = new SnapshotParser<FriendlyMessage>() {
@@ -251,6 +252,7 @@ public class ChatActivity extends AppCompatActivity {
         });
 
     }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);

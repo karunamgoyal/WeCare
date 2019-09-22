@@ -190,11 +190,6 @@ public class ProfileSetting extends AppCompatActivity
             in.putExtra(str, ausername);
             startActivity(in);
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-            Intent in = new Intent(this, UserComplaint.class);
-            in.putExtra(str, ausername);
-            startActivity(in);
-
         } else if (id == R.id.nav_slideshow) {
             Intent in = new Intent(this, MainActivity.class);
             SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);

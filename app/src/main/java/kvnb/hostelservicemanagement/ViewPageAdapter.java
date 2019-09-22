@@ -10,8 +10,8 @@ import java.util.List;
 
 public class ViewPageAdapter extends FragmentPagerAdapter {
 
-    private final List<Fragment> lstFragment=new ArrayList<>();
-    private final List<String> lstTiles=new ArrayList<>();
+    private final List<Fragment> lstFragment = new ArrayList<>();
+    private final List<String> lstTiles = new ArrayList<>();
 
     @Nullable
     @Override
@@ -33,7 +33,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
         return lstTiles.size();
     }
 
-    public void AddFragment(Fragment fragment,String title){
+    public void AddFragment(Fragment fragment, String title) {
         lstFragment.add(fragment);
         lstTiles.add(title);
     }

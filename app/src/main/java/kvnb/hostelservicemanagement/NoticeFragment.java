@@ -67,7 +67,7 @@ public class NoticeFragment extends Fragment {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),HeartRateMonitor.class);
+                Intent intent = new Intent(getContext(), HeartRateMonitor.class);
                 startActivity(intent);
             }
         });
@@ -75,7 +75,7 @@ public class NoticeFragment extends Fragment {
         cardViewgroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Groups.class);
+                Intent intent = new Intent(getContext(), Groups.class);
                 startActivity(intent);
             }
         });
@@ -83,7 +83,7 @@ public class NoticeFragment extends Fragment {
         cardViewsteps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),StepCounter.class);
+                Intent intent = new Intent(getContext(), StepCounter.class);
                 startActivity(intent);
             }
         });
@@ -91,7 +91,7 @@ public class NoticeFragment extends Fragment {
         cardViewdoctor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Doctor.class);
+                Intent intent = new Intent(getContext(), Doctor.class);
                 startActivity(intent);
             }
         });

@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        relativeLayout=findViewById(R.id.layout);
+        relativeLayout = findViewById(R.id.layout);
         //animation for login page
-        animationDrawable=(AnimationDrawable)relativeLayout.getBackground();
+        animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(2000);
         animationDrawable.start();
@@ -54,64 +54,64 @@ public class MainActivity extends AppCompatActivity {
         String user1 = pref.getString("user", "");
 
 
-            a.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View view) {
-                    TextView textView1 = (TextView) findViewById(R.id.username1);
-                    TextView textView2 = (TextView) findViewById(R.id.password1);
-                    final String u = textView1.getText().toString();
-                    final String p = textView2.getText().toString();
-                    if (!u.equals("")) {
-                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(u);
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                TextView textView1 = (TextView) findViewById(R.id.username1);
+                TextView textView2 = (TextView) findViewById(R.id.password1);
+                final String u = textView1.getText().toString();
+                final String p = textView2.getText().toString();
+                if (!u.equals("")) {
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(u);
 
 
-                        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
 
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    User user = dataSnapshot.getValue(User.class);
-                                    try {
-                                        Trippledes Des = new Trippledes();
-                                        password = Des.decrypt(user.getPassword());
-                                        Log.v("Checkingmsg","11");
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                    if (password.equals(p)) {
-                                        ausername = u;
-                                        editor.putString("user", u);
-                                        editor.commit();
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                User user = dataSnapshot.getValue(User.class);
+                                try {
+                                    Trippledes Des = new Trippledes();
+                                    password = Des.decrypt(user.getPassword());
+                                    Log.v("Checkingmsg", "11");
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                if (password.equals(p)) {
+                                    ausername = u;
+                                    editor.putString("user", u);
+                                    editor.commit();
 
 
-                                        sendMessage();
-                                    } else {
-                                        Snackbar.make(view, "Wrong Password", Snackbar.LENGTH_LONG)
-                                                .setAction("Action", null).show();
-                                    }
-
+                                    sendMessage();
                                 } else {
-                                    Snackbar.make(view, "Wrong Username If not Registered please register", Snackbar.LENGTH_LONG)
+                                    Snackbar.make(view, "Wrong Password", Snackbar.LENGTH_LONG)
                                             .setAction("Action", null).show();
                                 }
 
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError error) {
-                                // Failed to read value
-                                Snackbar.make(view, "Lost Network Connectivity", Snackbar.LENGTH_LONG)
+                            } else {
+                                Snackbar.make(view, "Wrong Username If not Registered please register", Snackbar.LENGTH_LONG)
                                         .setAction("Action", null).show();
                             }
-                        });
 
-                    } else {
-                        Snackbar.make(view, "Please Enter a username", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+                            // Failed to read value
+                            Snackbar.make(view, "Lost Network Connectivity", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
+                    });
+
+                } else {
+                    Snackbar.make(view, "Please Enter a username", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
                 }
-            });
+            }
+        });
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override

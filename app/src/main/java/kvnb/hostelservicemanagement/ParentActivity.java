@@ -42,30 +42,25 @@ public class ParentActivity extends AppCompatActivity
     private ViewPager viewPager;
     private ViewPageAdapter viewPageAdapter;
     private static FloatingActionButton fab;
-    public void sendComplaint() {
-        Intent in = new Intent(this, complaintreg.class);
-        in.putExtra(str, ausername);
-        startActivity(in);
-    }
 
     @Override
     protected void onPause() {
         super.onPause();
-        DatabaseReference mydb=FirebaseDatabase.getInstance().getReference().child("notices");
+        DatabaseReference mydb = FirebaseDatabase.getInstance().getReference().child("notices");
         mydb.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Intent intentNotification= new Intent();
+                Intent intentNotification = new Intent();
 
-                PendingIntent pendingintent=PendingIntent.getActivity(ParentActivity.this,0,intentNotification,0);
-                Notification noti=new Notification.Builder(ParentActivity.this).setTicker("Ticker")
+                PendingIntent pendingintent = PendingIntent.getActivity(ParentActivity.this, 0, intentNotification, 0);
+                Notification noti = new Notification.Builder(ParentActivity.this).setTicker("Ticker")
                         .setContentTitle("New Noticies")
                         .setContentText("Check your Noticies")
                         .setSmallIcon(R.drawable.logo)
                         .setContentIntent(pendingintent).getNotification();
-                noti.flags=Notification.FLAG_AUTO_CANCEL;
-                NotificationManager notificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-                notificationManager.notify(0,noti);
+                noti.flags = Notification.FLAG_AUTO_CANCEL;
+                NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                notificationManager.notify(0, noti);
             }
 
             @Override
@@ -84,22 +79,23 @@ public class ParentActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         Intent in = getIntent();
 
-        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
-        ausername =  firebaseUser.getUid().toString();
-        tabLayout=findViewById(R.id.tabLayout);
-        viewPager=findViewById(R.id.viewPager);
-        viewPageAdapter=new ViewPageAdapter(getSupportFragmentManager());
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        ausername = firebaseUser.getUid().toString();
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+        viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
         //Add fragment
-        viewPageAdapter.AddFragment(new NoticeFragment(),"");
-        viewPageAdapter.AddFragment(new NewsFragment(),"");
-        viewPageAdapter.AddFragment(new ProfileFragment(),"");
+        viewPageAdapter.AddFragment(new NoticeFragment(), "");
+        viewPageAdapter.AddFragment(new NewsFragment(), "");
+        viewPageAdapter.AddFragment(new ProfileFragment(), "");
         viewPager.setAdapter(viewPageAdapter);
 
 
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorite1);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_complaint);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_account);DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_account);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -140,7 +136,7 @@ public class ParentActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent =new Intent(this,AppSettings.class);
+            Intent intent = new Intent(this, AppSettings.class);
             intent.putExtra(str, ausername);
             startActivity(intent);
 
@@ -162,7 +158,7 @@ public class ParentActivity extends AppCompatActivity
         } /*else if (id == R.id.nav_gallery) {
             Intent in = new Intent(this, ChatActivity.class);
             startActivity(in);
-        } */else if (id == R.id.nav_slideshow) {
+        } */ else if (id == R.id.nav_slideshow) {
             FirebaseAuth.getInstance().signOut();
             Intent I = new Intent(this, SignInActivity.class);
             startActivity(I);
@@ -175,9 +171,11 @@ public class ParentActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public static FloatingActionButton getmyButton(){
+
+    public static FloatingActionButton getmyButton() {
         return fab;
     }
+
     public static String getMyData() {
         return ausername;
     }

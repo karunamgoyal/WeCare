@@ -1,4 +1,5 @@
 package kvnb.hostelservicemanagement;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -20,8 +21,8 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 
         // This is where you start your service
         SharedPreferences pref = aContext.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String key=pref.getString("user","");
-        if(!key.equals("")) {
+        String key = pref.getString("user", "");
+        if (!key.equals("")) {
             DatabaseReference mydb = FirebaseDatabase.getInstance().getReference().child("notices");
             mydb.addValueEventListener(new ValueEventListener() {
                 @Override

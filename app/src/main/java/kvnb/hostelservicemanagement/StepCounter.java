@@ -38,6 +38,7 @@ public class StepCounter extends AppCompatActivity {
     private GoogleApiClient mClient = null;
     private OnDataPointListener mListener;
     private TextView text;
+
     // Create Builder View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class StepCounter extends AppCompatActivity {
     }
 
     private void connectFitness() {
-        if (mClient == null){
+        if (mClient == null) {
             mClient = new GoogleApiClient.Builder(this)
                     .addApi(Fitness.SENSORS_API)
                     .addScope(new Scope(Scopes.FITNESS_LOCATION_READ)) // GET STEP VALUES
@@ -115,8 +116,8 @@ public class StepCounter extends AppCompatActivity {
         Fitness.SensorsApi.findDataSources(
                 mClient,
                 new DataSourcesRequest.Builder()
-                        .setDataTypes(DataType.TYPE_STEP_COUNT_CUMULATIVE)
-                        .setDataSourceTypes(DataSource.TYPE_DERIVED)
+                        .setDataTypes(DataType.TYPE_STEP_COUNT_DELTA)
+                        .setDataSourceTypes(DataSource.TYPE_RAW)
                         .build())
                 .setResultCallback(new ResultCallback<DataSourcesResult>() {
                     @Override
@@ -127,10 +128,10 @@ public class StepCounter extends AppCompatActivity {
                             Log.e(TAG, "Data Source type: " + dataSource.getDataType().getName());
                             //registerFitnessDataListener(dataSource, DataType.TYPE_STEP_COUNT_DELTA);
                             //Let's register a listener to receive Activity data!
-                            if (dataSource.getDataType().equals(DataType.TYPE_STEP_COUNT_CUMULATIVE) && mListener == null) {
+                            if (dataSource.getDataType().equals(DataType.TYPE_STEP_COUNT_DELTA) && mListener == null) {
                                 Log.i(TAG, "Data source for TYPE_STEP_COUNT_DELTA found!  Registering.");
 
-                                registerFitnessDataListener(dataSource, DataType.TYPE_STEP_COUNT_CUMULATIVE);
+                                registerFitnessDataListener(dataSource, DataType.AGGREGATE_STEP_COUNT_DELTA);
                             }
                         }
                     }
@@ -139,15 +140,15 @@ public class StepCounter extends AppCompatActivity {
 
     private void registerFitnessDataListener(final DataSource dataSource, DataType dataType) {
 
-        Log.e(TAG,"Function Fired");
+        Log.e(TAG, "Function Fired");
         text.setText("Steps");
         // [START register_data_listener]
         mListener = new OnDataPointListener() {
             @Override
             public void onDataPoint(DataPoint dataPoint) {
-                Log.e(TAG,"Datapoint Fired");
+                Log.e(TAG, "Datapoint Fired");
                 for (Field field : dataPoint.getDataType().getFields()) {
-                    Log.e(TAG,"For Loop Fired");
+                    Log.e(TAG, "For Loop Fired");
                     Value val = dataPoint.getValue(field);
                     text.setText(val.toString());
                     Log.e(TAG, "Detected DataPoint field: " + field.getName());

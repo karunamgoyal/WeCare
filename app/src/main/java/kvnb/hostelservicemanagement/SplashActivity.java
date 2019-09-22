@@ -18,21 +18,22 @@ import com.google.firebase.database.ValueEventListener;
 public class SplashActivity extends AppCompatActivity {
 
     private final int SPLASH_DISPLAY_LENGTH = 1200;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        new Handler().postDelayed(new Runnable(){
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 /* Create an Intent that will start the Main-Activity. */
                 FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                if(firebaseUser!= null){
-                    DatabaseReference mydbref= FirebaseDatabase.getInstance().getReference().child("person").child(firebaseUser.getUid());
+                if (firebaseUser != null) {
+                    DatabaseReference mydbref = FirebaseDatabase.getInstance().getReference().child("person").child(firebaseUser.getUid());
                     mydbref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.exists()) {
+                            if (dataSnapshot.exists()) {
                                 Log.v("checkingtheerror", "114");
                                 Person person = dataSnapshot.getValue(Person.class);
                                 Intent intent = new Intent(getApplicationContext(), ParentActivity.class);
@@ -42,9 +43,8 @@ public class SplashActivity extends AppCompatActivity {
                                     intent.putExtra("type", "patient");
                                 }
                                 startActivity(intent);
-                            }
-                            else{
-                                Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
+                            } else {
+                                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                                 startActivity(intent);
                             }
                         }
@@ -55,8 +55,7 @@ public class SplashActivity extends AppCompatActivity {
                         }
                     });
 
-                }
-                else {
+                } else {
                     Intent mainIntent = new Intent(SplashActivity.this, SignInActivity.class);
                     SplashActivity.this.startActivity(mainIntent);
                     SplashActivity.this.finish();

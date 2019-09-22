@@ -135,7 +135,7 @@ public class DiscussionFragment extends Fragment {
         mLinearLayoutManager = new LinearLayoutManager(getContext());
         mLinearLayoutManager.setStackFromEnd(true);
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
-        ImageView imagebutton=v.findViewById(R.id.addMessageImageView);
+        ImageView imagebutton = v.findViewById(R.id.addMessageImageView);
         imagebutton.setVisibility(ImageView.GONE);
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         SnapshotParser<FriendlyMessage> parser = new SnapshotParser<FriendlyMessage>() {
@@ -270,7 +270,7 @@ public class DiscussionFragment extends Fragment {
                 mMessageEditText.setText("");
             }
         });
-  // to load image
+        // to load image
         mAddMessageImageView = (ImageView) v.findViewById(R.id.addMessageImageView);
         mAddMessageImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -285,7 +285,8 @@ public class DiscussionFragment extends Fragment {
 
         return v;
     }
-  //function to get the image
+
+    //function to get the image
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);

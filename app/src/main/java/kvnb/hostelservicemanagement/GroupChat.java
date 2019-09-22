@@ -72,7 +72,8 @@ public class GroupChat extends AppCompatActivity {
     private String mUsername;
     private String mPhotoUrl;
     private SharedPreferences mSharedPreferences;
-    private GoogleApiClient mGoogleApiClient;;
+    private GoogleApiClient mGoogleApiClient;
+    ;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private Button mSendButton;
@@ -98,8 +99,8 @@ public class GroupChat extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mUsername = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-        ausername =mUsername;
-         key = getIntent().getExtras().getString("key");
+        ausername = mUsername;
+        key = getIntent().getExtras().getString("key");
         String name = getIntent().getExtras().getString("name");
         toolbar.setTitle(name);
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -108,7 +109,7 @@ public class GroupChat extends AppCompatActivity {
         mLinearLayoutManager = new LinearLayoutManager(getApplicationContext());
         mLinearLayoutManager.setStackFromEnd(true);
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
-        ImageView imagebutton=findViewById(R.id.addMessageImageView);
+        ImageView imagebutton = findViewById(R.id.addMessageImageView);
         imagebutton.setVisibility(ImageView.GONE);
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         SnapshotParser<FriendlyMessage> parser = new SnapshotParser<FriendlyMessage>() {
@@ -257,6 +258,7 @@ public class GroupChat extends AppCompatActivity {
         });
 
     }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);

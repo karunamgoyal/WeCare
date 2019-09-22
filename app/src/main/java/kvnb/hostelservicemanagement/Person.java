@@ -1,7 +1,6 @@
 package kvnb.hostelservicemanagement;
 
-public class Person
-{
+public class Person {
     private String Name;
     private String dob;
     private boolean gender;
@@ -17,10 +16,10 @@ public class Person
         return id;
     }
 
-    Person(){}
+    Person() {
+    }
 
-    Person(String Name, String dob, boolean gender, boolean type ,String contact_number)
-    {
+    Person(String Name, String dob, boolean gender, boolean type, String contact_number) {
         this.dob = dob;
         this.gender = gender;
         this.Name = Name;
@@ -48,11 +47,35 @@ public class Person
         this.contact_number = contact_number;
     }
 
-    public String getName() { return this.Name ;};
-    public String getDob() { return this.dob; };
-    public String getContact_number() { return this.contact_number; };
-    public boolean getGender() { return this.gender ; };
-    public boolean getType() { return this.type ;};
+    public String getName() {
+        return this.Name;
+    }
+
+    ;
+
+    public String getDob() {
+        return this.dob;
+    }
+
+    ;
+
+    public String getContact_number() {
+        return this.contact_number;
+    }
+
+    ;
+
+    public boolean getGender() {
+        return this.gender;
+    }
+
+    ;
+
+    public boolean getType() {
+        return this.type;
+    }
+
+    ;
 
 }
 

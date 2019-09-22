@@ -1,4 +1,5 @@
 package kvnb.hostelservicemanagement;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
@@ -196,13 +197,13 @@ public class VideoChat extends AppCompatActivity {
         videoSurface.setVisibility(toggle ? View.GONE : View.VISIBLE);
 
         // add an icon to let the other user know remote video has been disabled
-        if(toggle){
+        if (toggle) {
             ImageView noCamera = new ImageView(this);
             noCamera.setImageResource(R.drawable.video_disabled);
             videoContainer.addView(noCamera);
         } else {
             ImageView noCamera = (ImageView) videoContainer.getChildAt(1);
-            if(noCamera != null) {
+            if (noCamera != null) {
                 videoContainer.removeView(noCamera);
             }
         }
@@ -211,7 +212,6 @@ public class VideoChat extends AppCompatActivity {
     private void onRemoteUserLeft() {
         removeVideo(R.id.bg_video_container);
     }
-
 
 
     public boolean checkSelfPermission(String permission, int requestCode) {

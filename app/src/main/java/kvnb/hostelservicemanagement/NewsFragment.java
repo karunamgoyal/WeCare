@@ -106,7 +106,7 @@ public class NewsFragment extends Fragment {
             String xml = "";
 
             String urlParameters = "";
-            xml = Function.excuteGet("https://newsapi.org/v2/everything?q=healthcare"+"&apiKey=" + API_KEY, urlParameters);
+            xml = Function.excuteGet("https://newsapi.org/v2/everything?q=healthcare" + "&apiKey=" + API_KEY, urlParameters);
             return xml;
         }
 

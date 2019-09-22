@@ -64,25 +64,25 @@ public class Register extends AppCompatActivity {
                     if (TextUtils.isEmpty(name1)) {
                         name.setError("Name cannot be empty");
                         //return;
-                    }  else if (TextUtils.isEmpty(u)) {
+                    } else if (TextUtils.isEmpty(u)) {
                         username.setError("UserName cannot be empty");
                         //return;
-                    } else if (TextUtils.isEmpty(passTemp)||passTemp.length()<8) {
+                    } else if (TextUtils.isEmpty(passTemp) || passTemp.length() < 8) {
                         password.setError("Password not strong must be atleast 8 character");
                         //return;
-                    }  else if (TextUtils.isEmpty(mail1)) {
+                    } else if (TextUtils.isEmpty(mail1)) {
                         mail.setError("Email cannot be empty");
                         //return;
-                    }  else if (TextUtils.isEmpty(phno1)||phno1.length()!=10) {
+                    } else if (TextUtils.isEmpty(phno1) || phno1.length() != 10) {
                         phno.setError("Contact Number not correct");
                         //return;
-                    }  else if (TextUtils.isEmpty(rollno1)) {
+                    } else if (TextUtils.isEmpty(rollno1)) {
                         rollno.setError("Roll Number cannot be empty");
                         //return;
-                    }  else if (TextUtils.isEmpty(roomno1)) {
+                    } else if (TextUtils.isEmpty(roomno1)) {
                         roomno.setError("Room Number cannot be empty");
                         //return;
-                    }  else if (TextUtils.isEmpty(hno1)) {
+                    } else if (TextUtils.isEmpty(hno1)) {
                         hno.setError("Hostel Number cannot be empty");
                         //return;
                     } else {

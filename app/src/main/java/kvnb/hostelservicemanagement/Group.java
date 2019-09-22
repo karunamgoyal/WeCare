@@ -5,6 +5,7 @@ public class Group {
     private String groupdes;
     private String admin;
     private String id;
+
     public String getGroupname() {
         return groupname;
     }
@@ -37,7 +38,9 @@ public class Group {
         return id;
     }
 
-    public Group(){}
+    public Group() {
+    }
+
     public Group(String groupname, String groupdes, String admin) {
         this.groupname = groupname;
         this.groupdes = groupdes;
