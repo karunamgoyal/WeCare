@@ -55,12 +55,14 @@ public class StepCounter extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        connectFitness();
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 //your method
+                connectFitness();
             }
-        }, 0, 10000);
+        }, 0, 100000);
 
     }
 
@@ -68,7 +70,6 @@ public class StepCounter extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        connectFitness();
     }
 
     private void connectFitness() {
