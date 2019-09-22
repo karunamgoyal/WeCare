@@ -115,7 +115,7 @@ public class StepCounter extends AppCompatActivity {
         Fitness.SensorsApi.findDataSources(
                 mClient,
                 new DataSourcesRequest.Builder()
-                        .setDataTypes(DataType.TYPE_STEP_COUNT_DELTA)
+                        .setDataTypes(DataType.TYPE_STEP_COUNT_CUMULATIVE)
                         .setDataSourceTypes(DataSource.TYPE_DERIVED)
                         .build())
                 .setResultCallback(new ResultCallback<DataSourcesResult>() {
@@ -127,10 +127,10 @@ public class StepCounter extends AppCompatActivity {
                             Log.e(TAG, "Data Source type: " + dataSource.getDataType().getName());
                             //registerFitnessDataListener(dataSource, DataType.TYPE_STEP_COUNT_DELTA);
                             //Let's register a listener to receive Activity data!
-                            if (dataSource.getDataType().equals(DataType.TYPE_STEP_COUNT_DELTA) && mListener == null) {
+                            if (dataSource.getDataType().equals(DataType.TYPE_STEP_COUNT_CUMULATIVE) && mListener == null) {
                                 Log.i(TAG, "Data source for TYPE_STEP_COUNT_DELTA found!  Registering.");
 
-                                registerFitnessDataListener(dataSource, DataType.AGGREGATE_STEP_COUNT_DELTA);
+                                registerFitnessDataListener(dataSource, DataType.TYPE_STEP_COUNT_CUMULATIVE);
                             }
                         }
                     }
