@@ -76,8 +76,6 @@ class ListNewsAdapter extends BaseAdapter {
                 System.out.println(song.get(NewsFragment.KEY_URLTOIMAGE));
                 Picasso.with(activity)
                         .load(song.get(NewsFragment.KEY_URLTOIMAGE))
-                        .centerCrop()
-                        .resize(wt - 32, 315)
                         .into(holder.galleryImage);
             }
         } catch (Exception e) {
