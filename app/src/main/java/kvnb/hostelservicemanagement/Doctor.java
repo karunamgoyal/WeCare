@@ -129,10 +129,9 @@ public class Doctor extends AppCompatActivity {
                 if (friendlyMessage.getName() != null) {
                     Log.d("Checckingmsss", friendlyMessage.getName());
                     viewHolder.messageTextView.setText(friendlyMessage.getName());
-                    if (friendlyMessage.getType() == false) {
+                    if ((friendlyMessage.getType() == false)) {
                         Log.d("Checckingmsss", "" + friendlyMessage.getType());
                         viewHolder.des.setVisibility(TextView.GONE);
-
                         viewHolder.messageTextView.setVisibility(TextView.GONE);
                         viewHolder.messengerTextView.setVisibility(TextView.GONE);
                         viewHolder.join.setVisibility(TextView.GONE);

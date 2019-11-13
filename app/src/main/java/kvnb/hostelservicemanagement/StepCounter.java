@@ -43,34 +43,22 @@ public class StepCounter extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final int MY_CAMERA_REQUEST_CODE = 100;
-
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
-        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_counter);
         text = findViewById(R.id.text);
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        connectFitness();
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 //your method
                 connectFitness();
             }
-        }, 0, 100000);
-
+        }, 0, 10000);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        connectFitness();
     }
 
     private void connectFitness() {
@@ -117,7 +105,7 @@ public class StepCounter extends AppCompatActivity {
                 mClient,
                 new DataSourcesRequest.Builder()
                         .setDataTypes(DataType.TYPE_STEP_COUNT_DELTA)
-                        .setDataSourceTypes(DataSource.TYPE_RAW)
+                        .setDataSourceTypes(DataSource.TYPE_DERIVED)
                         .build())
                 .setResultCallback(new ResultCallback<DataSourcesResult>() {
                     @Override
@@ -131,7 +119,7 @@ public class StepCounter extends AppCompatActivity {
                             if (dataSource.getDataType().equals(DataType.TYPE_STEP_COUNT_DELTA) && mListener == null) {
                                 Log.i(TAG, "Data source for TYPE_STEP_COUNT_DELTA found!  Registering.");
 
-                                registerFitnessDataListener(dataSource, DataType.AGGREGATE_STEP_COUNT_DELTA);
+                                registerFitnessDataListener(dataSource, DataType.TYPE_STEP_COUNT_DELTA);
                             }
                         }
                     }
@@ -141,7 +129,6 @@ public class StepCounter extends AppCompatActivity {
     private void registerFitnessDataListener(final DataSource dataSource, DataType dataType) {
 
         Log.e(TAG, "Function Fired");
-        text.setText("Steps");
         // [START register_data_listener]
         mListener = new OnDataPointListener() {
             @Override
@@ -163,7 +150,7 @@ public class StepCounter extends AppCompatActivity {
                 new SensorRequest.Builder()
                         .setDataSource(dataSource) // Optional but recommended for custom data sets.
                         .setDataType(dataType) // Can't be omitted.
-                        .setSamplingRate(1, TimeUnit.SECONDS)
+                        .setSamplingRate(3, TimeUnit.SECONDS)
                         .build(),
                 mListener).setResultCallback(new ResultCallback<Status>() {
             @Override

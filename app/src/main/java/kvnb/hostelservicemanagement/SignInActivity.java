@@ -16,11 +16,13 @@
 package kvnb.hostelservicemanagement;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 
@@ -36,7 +38,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignInActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -55,10 +63,13 @@ public class SignInActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
+        FrameLayout frameLayout = findViewById(R.id.sign_in_layout);
         // Assign fields
         mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
-
+        AnimationDrawable animationDrawable = (AnimationDrawable) frameLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(1000);
+        animationDrawable.setExitFadeDuration(1000);
+        animationDrawable.start();
         // Set click listeners
         mSignInButton.setOnClickListener(this);
 
@@ -139,7 +150,39 @@ public class SignInActivity extends AppCompatActivity implements
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Log.d(TAG, "i am working");
-                            startActivity(new Intent(SignInActivity.this, RegisterActivity.class));
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if (firebaseUser != null) {
+                                DatabaseReference mydbref = FirebaseDatabase.getInstance().getReference().child("person").child(firebaseUser.getUid());
+                                mydbref.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            Log.v("checkingtheerror", "114");
+                                            Person person = dataSnapshot.getValue(Person.class);
+                                            Intent intent = new Intent(getApplicationContext(), ParentActivity.class);
+                                            if (person.getType()) {
+                                                intent.putExtra("type", "doctor");
+                                            } else {
+                                                intent.putExtra("type", "patient");
+                                            }
+                                            startActivity(intent);
+                                        } else {
+                                            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            } else {
+                                Intent mainIntent = new Intent(SignInActivity.this, SignInActivity.class);
+                                startActivity(mainIntent);
+                                finish();
+                            }
                             finish();
                         }
                     }
